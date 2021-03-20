@@ -17,7 +17,7 @@
 # 3. Python App
 
 
-## [Python App](./hello_world_app/app.py)
+## [Python App](./app/app.py)
 
 ```
 from flask import Flask
@@ -32,8 +32,8 @@ def index():
 app.run(host='10.10.10.11', port=8080)
 ```
 
-## [requirements](./hello_world_app/requirements.txt)
-pip3 install -r requirement.txt
+## [requirements](./app/requirements.txt)
+`pip3 install -r requirement.txt`
 
 ## Execute python app.
 `cd hello_world_app; python3 app.py`
