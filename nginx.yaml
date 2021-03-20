@@ -1,0 +1,36 @@
+---
+- name: Install nginx
+  hosts: webserver
+
+  become: true
+
+  #Update prior to installation
+  tasks:
+  - shell: apt-get upgrade -y; apt-get update
+
+  #Install Nginx
+  - name: Install nginx
+    apt:
+      name: nginx
+      state: latest
+
+  #Start Nginx
+  - name: Start NGiNX
+    service:
+      name: nginx
+      state: started
+      enabled: true
+
+  #Setup Reverse proxy
+  - name: ReverseProxy for App (Hello World)
+    blockinfile:
+        path: ""
+        block: |
+          server {
+              listen 80;
+              location / {
+                  proxy_pass http://10.10.10.11:8080;
+                  proxy_read_timeout 90s;
+              }
+          }
+          

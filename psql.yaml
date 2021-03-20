@@ -1,0 +1,36 @@
+---
+- name: Install psql
+  hosts: db
+
+  become: true
+
+  #Update prior to installation
+  tasks:
+  - shell: apt-get upgrade -y; apt-get update
+
+  #Install Postgresql
+  - name: Install PostgreSQL
+    apt:
+      name: postgresql
+      state: latest
+
+  #Start postgresql
+  - name: Start PostgreSQL
+    service:
+      name: postgresql
+      state: started
+      enabled: true
+
+  # Create a new database with name "py_hello_world"
+  - postgresql_db:
+      name: py_hello_world
+
+  # Create DB User and give all permission to table hello_world 
+  # Users password never expires
+  - name: Connect to "py_hello_world"
+    postgresql_user:
+      db: py_hello_world
+      name: pyhwuser
+      password: MySuperSecret!Pass
+      priv: "CONNECT/hello_world:ALL"
+      expires: 'infinity'
