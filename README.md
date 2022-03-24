@@ -54,4 +54,4 @@ Nginx should be considered as reverse-proxy which listens on HTTP/HTTPS ports (8
 
 Nginx & psql (`enabled: true`)
 
-Python App (This would be something like i mentioned above running with supervisor or even docker.)
+Python App (This would be something like I  mentioned above running with supervisor or even docker).
